@@ -16,7 +16,7 @@
 - [Запуск из терминала](#запуск-из-терминала)
 - [Allure отчёт](#allure-отчёт)
 - [Уведомления в Telegram](#уведомления-в-telegram)
-- [Видео выполнения тестов в Selenoid](#видео-выполнения-тестов-в-selenoid)
+- [Пример видео выполнения теста в Selenoid](#пример-видео-выполнения-теста-в-selenoid)
 - [Планы по развитию](#планы-по-развитию)
 
 ---
@@ -29,7 +29,7 @@
 | **Gradle 8.5** | сборка проекта |
 | **JUnit 5** | тестовый фреймворк |
 | **Selenide 7.x** | UI-автоматизация |
-| **Allure 2** | отчёты |
+| **Allure** | отчёты |
 | **Selenoid** | удалённые браузеры |
 | **Jenkins** | CI/CD |
 | **Allure Notifications + Telegram Bot** | уведомления |
@@ -237,19 +237,19 @@ gradle clean test \
 - графики
 
 ### *Основная страница отчёта*
-![Allure report](images/Allure report.jpg)
+![Allure report](images/allure report.jpg)
 
 ### *Тест-кейсы*
-![Allure report](images/Allure suites.jpg)
+![Allure suites](images/allure suites.jpg)
 
 ### *Графики*
 
-![Allure report](images/Allure graphs.jpg)
+![Allure graphs](images/allure graphs.jpg)
 
 ---
 ## 🤖 Уведомления в Telegram
 
-![Allure report](images/Telegram bot.jpg)
+![Telegram bot](images/telegram bot.jpg)
 
 Бот отправляет:
 
