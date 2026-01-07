@@ -237,19 +237,19 @@ gradle clean test \
 - графики
 
 ### *Основная страница отчёта*
-![Allure report](images/allure report.jpg)
+![Allure report](images/allure-report.jpg)
 
 ### *Тест-кейсы*
-![Allure suites](images/allure suites.jpg)
+![Allure suites](images/allure-suites.jpg)
 
 ### *Графики*
 
-![Allure graphs](images/allure graphs.jpg)
+![Allure graphs](images/allure-graphs.jpg)
 
 ---
 ## 🤖 Уведомления в Telegram
 
-![Telegram bot](images/telegram bot.jpg)
+![Allure Telegram bot](images/telegram-bot.jpg)
 
 Бот отправляет:
 
