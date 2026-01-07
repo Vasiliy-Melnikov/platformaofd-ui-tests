@@ -247,7 +247,6 @@ gradle clean test \
 ![Allure report](images/Allure graphs.jpg)
 
 ---
-
 ## 🤖 Уведомления в Telegram
 
 ![Allure report](images/Telegram bot.jpg)
