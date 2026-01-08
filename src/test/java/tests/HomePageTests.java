@@ -94,7 +94,7 @@ public class HomePageTests extends TestBase {
 
     @Test
     @Story("Блок новостей")
-    @DisplayName("В блоке «Новости» есть хотя бы одна дата в формате dd.MM.yyyy")
+    @DisplayName("В блоке «Новости» есть хотя бы одна дата в формате dd.mm.yyyy")
     void newsBlockHasAnyDatedNews() {
         homePage.openMainPage();
         String newsBlockText = $x("//h2[.='Новости']/parent::*").getText();
@@ -103,7 +103,7 @@ public class HomePageTests extends TestBase {
         Matcher matcher = datePattern.matcher(newsBlockText);
 
         assertThat(matcher.find())
-                .as("Ожидаем, что в блоке «Новости» есть хотя бы одна дата в формате dd.MM.yyyy")
+                .as("Ожидаем, что в блоке «Новости» есть хотя бы одна дата в формате dd.mm.yyyy")
                 .isTrue();
     }
 
