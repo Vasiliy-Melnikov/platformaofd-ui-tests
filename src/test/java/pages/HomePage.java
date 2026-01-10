@@ -48,32 +48,33 @@ public class HomePage {
         return this;
     }
 
-    public HomePage clickChooseService() {
-        chooseServiceButton.shouldBe(visible).click();
-        return this;
-    }
-
     private void hideChatWidgetIfExists() {
         executeJavaScript("""
-            document.querySelector('jdiv.hoverArea__EiY98')?.remove();
-            document.querySelectorAll('jdiv').forEach(e => e.style.display='none');
-        """);
+        document.querySelectorAll('jdiv').forEach(n => n.remove());
+    """);
     }
 
     private void acceptCookiesIfVisible() {
-        if (!cookieAcceptButton.exists()) return; // баннера нет — ок
+        for (int i = 0; i < 3; i++) {
+            try {
+                hideChatWidgetIfExists();
 
-        hideChatWidgetIfExists();
+                if (!cookieAcceptButton.isDisplayed()) return;
 
-        try {
-            cookieAcceptButton.shouldBe(visible, Duration.ofSeconds(5))
-                    .shouldBe(enabled)
-                    .scrollIntoView(true)
-                    .click();
-        } catch (Exception ignored) {
-            hideChatWidgetIfExists();
-            cookieAcceptButton.click(ClickOptions.usingJavaScript());
+                cookieAcceptButton.scrollIntoView(true)
+                        .shouldBe(visible, Duration.ofSeconds(5))
+                        .shouldBe(enabled)
+                        .click(ClickOptions.usingJavaScript());
+
+                return;
+            } catch (Exception ignored) {
+            }
         }
+    }
+
+    public HomePage clickChooseService() {
+        chooseServiceButton.shouldBe(visible).click();
+        return this;
     }
 
     public HomePage clickGoToKnowledgeBase() {
