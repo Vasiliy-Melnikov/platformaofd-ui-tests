@@ -2,7 +2,9 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.ClickOptions;
 
+import java.time.Duration;
 import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
@@ -46,28 +48,32 @@ public class HomePage {
         return this;
     }
 
+    public HomePage clickChooseService() {
+        chooseServiceButton.shouldBe(visible).click();
+        return this;
+    }
+
     private void hideChatWidgetIfExists() {
         executeJavaScript("""
-        const el = document.querySelector('jdiv.hoverArea__EiY98');
-        if (el) el.style.display = 'none';
-    """);
+            document.querySelector('jdiv.hoverArea__EiY98')?.remove();
+            document.querySelectorAll('jdiv').forEach(e => e.style.display='none');
+        """);
     }
 
     private void acceptCookiesIfVisible() {
-        if (!cookieAcceptButton.exists()) return;
+        if (!cookieAcceptButton.exists()) return; // баннера нет — ок
 
         hideChatWidgetIfExists();
 
         try {
-            cookieAcceptButton.shouldBe(visible).shouldBe(enabled).click();
+            cookieAcceptButton.shouldBe(visible, Duration.ofSeconds(5))
+                    .shouldBe(enabled)
+                    .scrollIntoView(true)
+                    .click();
         } catch (Exception ignored) {
-            executeJavaScript("arguments[0].click();", cookieAcceptButton);
+            hideChatWidgetIfExists();
+            cookieAcceptButton.click(ClickOptions.usingJavaScript());
         }
-    }
-
-    public HomePage clickChooseService() {
-        chooseServiceButton.shouldBe(visible).click();
-        return this;
     }
 
     public HomePage clickGoToKnowledgeBase() {
