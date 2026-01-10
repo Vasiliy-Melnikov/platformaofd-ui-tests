@@ -46,9 +46,22 @@ public class HomePage {
         return this;
     }
 
+    private void hideChatWidgetIfExists() {
+        executeJavaScript("""
+        const el = document.querySelector('jdiv.hoverArea__EiY98');
+        if (el) el.style.display = 'none';
+    """);
+    }
+
     private void acceptCookiesIfVisible() {
-        if (cookieAcceptButton.exists() && cookieAcceptButton.isDisplayed()) {
-            cookieAcceptButton.click();
+        if (!cookieAcceptButton.exists()) return;
+
+        hideChatWidgetIfExists();
+
+        try {
+            cookieAcceptButton.shouldBe(visible).shouldBe(enabled).click();
+        } catch (Exception ignored) {
+            executeJavaScript("arguments[0].click();", cookieAcceptButton);
         }
     }
 
