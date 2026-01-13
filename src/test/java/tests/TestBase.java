@@ -20,14 +20,13 @@ public class TestBase {
             "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
     @BeforeAll
-    static void beforeAll() {
+    static void setupSelenideConfig() {
         Configuration.baseUrl = "https://platformaofd.ru";
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.pageLoadStrategy = "eager";
-        String remote = System.getProperty("remote", DEFAULT_REMOTE);
-        Configuration.remote = remote;
+        Configuration.remote = System.getProperty("remote", DEFAULT_REMOTE);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.of(
