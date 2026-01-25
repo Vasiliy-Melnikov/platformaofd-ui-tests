@@ -43,7 +43,7 @@ public class HomePage {
     private final SelenideElement footer = $("footer");
 
     public HomePage openMainPage() {
-        open("/");
+        open("");
         acceptCookiesIfVisible();
         return this;
     }

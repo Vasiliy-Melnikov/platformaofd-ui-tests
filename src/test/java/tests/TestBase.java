@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.net.URL;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.sessionId;
@@ -42,24 +41,6 @@ public class TestBase {
             Configuration.browserCapabilities = capabilities;
         }
     }
-
-    private static URL buildRemoteUrl(URL baseRemoteUrl) {
-        String user = System.getenv("SELENOID_USER");
-        String pass = System.getenv("SELENOID_PASS");
-
-        String url = baseRemoteUrl.toString();
-        if (user != null && pass != null && !url.contains("@")) {
-            url = url.replace("https://", "https://" + user + ":" + pass + "@")
-                    .replace("http://", "http://" + user + ":" + pass + "@");
-        }
-
-        try {
-            return new URL(url);
-        } catch (Exception e) {
-            throw new RuntimeException("Invalid remote url: " + url, e);
-        }
-    }
-
     @BeforeEach
     void addAllureListener() {
         SelenideLogger.addListener("allure", new AllureSelenide()

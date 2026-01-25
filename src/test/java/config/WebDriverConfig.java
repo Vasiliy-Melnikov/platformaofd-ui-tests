@@ -34,7 +34,6 @@ public interface WebDriverConfig extends Config {
     boolean isRemote();
 
     @Key("remoteUrl")
-    @DefaultValue("")
     URL remoteUrl();
 
     @Key("enableVNC")
