@@ -1,8 +1,9 @@
 package pages;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.ClickOptions;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 import java.util.regex.Pattern;
@@ -42,18 +43,21 @@ public class HomePage {
 
     private final SelenideElement footer = $("footer");
 
+    @Step("Открыть главную страницу")
     public HomePage openMainPage() {
         open("");
         acceptCookiesIfVisible();
         return this;
     }
 
+    @Step("Скрыть виджет чата, если он есть")
     private void hideChatWidgetIfExists() {
         executeJavaScript("""
-        document.querySelectorAll('jdiv').forEach(n => n.remove());
-    """);
+                document.querySelectorAll('jdiv').forEach(n => n.remove());
+                """);
     }
 
+    @Step("Принять cookies, если попап отображается")
     private void acceptCookiesIfVisible() {
         for (int i = 0; i < 3; i++) {
             try {
@@ -72,16 +76,19 @@ public class HomePage {
         }
     }
 
+    @Step("Нажать «Выбрать сервис»")
     public HomePage clickChooseService() {
         chooseServiceButton.shouldBe(visible).click();
         return this;
     }
 
+    @Step("Нажать «Перейти в Базу знаний»")
     public HomePage clickGoToKnowledgeBase() {
         goToKnowledgeBaseLink.shouldBe(visible).click();
         return this;
     }
 
+    @Step("Открыть первую видимую новость и запомнить заголовок")
     public String clickFirstVisibleNewsAndGetTitle() {
         SelenideElement link = newsLinks.findBy(visible);
         String title = link.getText();
@@ -89,17 +96,20 @@ public class HomePage {
         return title;
     }
 
+    @Step("Проверить: хедер видим")
     public HomePage headerShouldBeVisible() {
         header.shouldBe(visible);
         return this;
     }
 
+    @Step("Проверить: главный экран содержит ключевые тексты")
     public HomePage bodyShouldContainHeroTexts() {
         body.shouldHave(text("Умные"), text("решения"));
         body.shouldHave(text("8 (495) 252-50-50"));
         return this;
     }
 
+    @Step("Проверить: хедер содержит пункты меню")
     public HomePage headerShouldContainMenuItems() {
         header.shouldHave(
                 text("Сервисы"),
@@ -113,17 +123,20 @@ public class HomePage {
         return this;
     }
 
+    @Step("Проверить: открыта страница «Сервисы»")
     public HomePage shouldBeOnServicesPage() {
         webdriver().shouldHave(urlContaining("/services"));
         $$("h1, h2").findBy(text("Сервисы")).shouldBe(visible);
         return this;
     }
 
+    @Step("Проверить: в блоке «Сервисы» есть оператор фискальных данных")
     public HomePage servicesBlockShouldContainOfdCard() {
         servicesTitle.shouldBe(visible).parent().shouldHave(text("оператор фискальных данных"));
         return this;
     }
 
+    @Step("Проверить: блок «База знаний» содержит основные разделы")
     public HomePage knowledgeBaseBlockShouldContainSections() {
         knowledgeBaseTitle.shouldBe(visible);
         body.shouldHave(
@@ -137,12 +150,14 @@ public class HomePage {
         return this;
     }
 
+    @Step("Проверить: открыта страница «База знаний»")
     public HomePage shouldBeOnKnowledgeBasePage() {
         webdriver().shouldHave(urlContaining("baza-znaniy"));
         body.shouldHave(text("База знаний"));
         return this;
     }
 
+    @Step("Проверить: в блоке «Новости» есть дата в формате dd.MM.yyyy")
     public HomePage newsBlockShouldHaveAnyDateDdMmYyyy() {
         newsTitle.shouldBe(visible);
         String text = newsBlock.getText();
@@ -153,16 +168,19 @@ public class HomePage {
         return this;
     }
 
+    @Step("Проверить: открытая новость содержит заголовок «{title}»")
     public HomePage openedNewsPageShouldContainTitle(String title) {
         $$("h1, h2").findBy(text(title)).shouldBe(visible);
         return this;
     }
 
+    @Step("Проверить: футер видим")
     public HomePage footerShouldBeVisible() {
         footer.scrollTo().shouldBe(visible);
         return this;
     }
 
+    @Step("Проверить: футер содержит контакты")
     public HomePage footerShouldContainContacts() {
         footer.shouldHave(
                 text("8 (495) 252-50-50"),
@@ -172,6 +190,7 @@ public class HomePage {
         return this;
     }
 
+    @Step("Проверить: в футере указаны параметры подключения кассы (URL/IP/порт)")
     public HomePage footerShouldContainKktParams() {
         footer.shouldHave(
                 text("Параметры подключения кассы"),
